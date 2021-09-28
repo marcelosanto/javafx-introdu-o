@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -7,5 +8,6 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ViewController">
    <children>
       <ComboBox fx:id="comboBoxPerson" layoutX="44.0" layoutY="48.0" onAction="#onComboBoxPersonAction" prefWidth="150.0" promptText="Select a person..." />
+      <Button fx:id="buttonAllPerson" layoutX="262.0" layoutY="48.0" mnemonicParsing="false" onAction="#onComboBoxPersonAction" text="All" />
    </children>
 </AnchorPane>
