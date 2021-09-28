@@ -1,52 +1,55 @@
 package com.example.demo;
 
-import com.example.demo.gui.util.Alerts;
-import com.example.demo.gui.util.Constraints;
+import com.example.demo.model.entities.Person;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.util.Callback;
 
 import java.net.URL;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ViewController implements Initializable {
 
     @FXML
-    private TextField txtNumber1;
+    private ComboBox<Person> comboBoxPerson;
+
+    private ObservableList<Person> observableList;
 
     @FXML
-    private TextField txtNumber2;
-
-    @FXML
-    private Label lblResult;
-
-    @FXML
-    private Button btSum;
-
-
-    @FXML
-    public void onBtSumAction() {
-        try {
-            Locale.setDefault(Locale.US);
-            double number1 = Double.parseDouble(txtNumber1.getText());
-            double number2 = Double.parseDouble(txtNumber2.getText());
-            double sum = number1 + number2;
-
-            lblResult.setText(String.format("%.2f", sum));
-        } catch (NumberFormatException e) {
-            Alerts.showAlert("Error", "Parse error", e.getMessage(), Alert.AlertType.ERROR);
-        }
-
-
+    public void onComboBoxPersonAction() {
+        Person person = comboBoxPerson.getSelectionModel().getSelectedItem();
+        System.out.println(person);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Constraints.setTextFieldDouble(txtNumber1);
-        Constraints.setTextFieldDouble(txtNumber2);
+        List<Person> list = new ArrayList<>();
+        list.add(new Person(1, "Ezequias", "zeca@gmail.com"));
+        list.add(new Person(2, "Magdalena", "magdalena@gmail.com"));
+        list.add(new Person(3, "Marcelo", "marcelo@gmail.com"));
+        list.add(new Person(4, "Gabriel", "biel@gmail.com"));
+        list.add(new Person(5, "Alice", "alice@gmail.com"));
+        list.add(new Person(6, "Ezequiana", "quiana@gmail.com"));
+
+        observableList = FXCollections.observableList(list);
+        comboBoxPerson.setItems(observableList);
+
+        Callback<ListView<Person>, ListCell<Person>> factory = lv -> new ListCell<Person>() {
+            @Override
+            protected void updateItem(Person item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : item.getName());
+            }
+        };
+        comboBoxPerson.setCellFactory(factory);
+        comboBoxPerson.setButtonCell(factory.call(null));
+
     }
 }

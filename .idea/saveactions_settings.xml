@@ -8,6 +8,9 @@
         <option value="activateOnBatch" />
         <option value="organizeImports" />
         <option value="reformat" />
+        <option value="generateSerialVersionUID" />
+        <option value="unnecessaryFinalOnLocalVariableOrParameter" />
+        <option value="unnecessarySemicolon" />
       </set>
     </option>
     <option name="configurationPath" value="" />
